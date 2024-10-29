@@ -1,5 +1,6 @@
 ## Crosses of Noliki
 Реализация игры "Крестики-Нолики" на HTML, CSS и JavaScript  
+  
 ![screenshot](Crosses_of_Noliki.JPG)
 
 [GitHub Pages Crosses of Noliki](https://vsamura.github.io/Crosses_of_Noliki/)
