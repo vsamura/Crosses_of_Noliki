@@ -28,7 +28,7 @@ function tapCell(cell, index){
     updeteCell(cell, index)
     if(!checkWinner()){
       changlePlayer()
-      randomPick()
+      MakeMove()
     }
   }
 }
@@ -43,13 +43,13 @@ function changlePlayer(){
   player = (player == 'X') ? 'O' : 'X'
 }
 
-function randomPick(){
+function MakeMove(){
   isPauseGame = true
 
   setTimeout(() => {
-    let randomIndex = logica(player)
+    let moveIndex = logic(player)
 
-    updeteCell(cells[randomIndex], randomIndex, player)
+    updeteCell(cells[moveIndex], moveIndex, player)
     if(!checkWinner()){
       changlePlayer()
       isPauseGame = false
@@ -116,8 +116,8 @@ restartBtn.addEventListener('click', () => {
   titleHeader.textContent = 'Choose'
 })
 
-// Логика хода
-function ran(){
+// Рандомный ход
+function randomMove(){
   do {
       res = Math.floor(Math.random() * inputCells.length)
     } while (
@@ -126,7 +126,8 @@ function ran(){
   return res
 }
 
-function logica(S){
+// Логика хода
+function logic(S){
   let U = S
   S = (S == 'X') ? 'O' : 'X'
   if(inputCells[4] == ''){
@@ -205,16 +206,25 @@ function logica(S){
   if(inputCells[1] == S && inputCells[2] == S && inputCells[0] == '' ) return 0
   if(inputCells[3] == S && inputCells[6] == S && inputCells[0] == '' ) return 0
 
-  if(inputCells[0] == S && inputCells[2] == S && inputCells[1] != U ) return 1
-  if(inputCells[2] == S && inputCells[8] == S && inputCells[5] != U ) return 5
-  if(inputCells[6] == S && inputCells[8] == S && inputCells[7] != U ) return 7
-  if(inputCells[0] == S && inputCells[6] == S && inputCells[3] != U ) return 3
+  if(inputCells[0] == S && inputCells[2] == S && inputCells[1] != U && inputCells[1] == '' ) return 1
+  if(inputCells[2] == S && inputCells[8] == S && inputCells[5] != U && inputCells[5] == '' ) return 5
+  if(inputCells[6] == S && inputCells[8] == S && inputCells[7] != U && inputCells[7] == '' ) return 7
+  if(inputCells[0] == S && inputCells[6] == S && inputCells[3] != U && inputCells[3] == '' ) return 3
 
-  if(inputCells[4] == S && inputCells[0] == S && inputCells[8] == U ) return 1
-  if(inputCells[4] == S && inputCells[6] == S && inputCells[2] == U ) return 8
+  if(inputCells[4] == S && inputCells[0] == S && inputCells[8] == U && inputCells[1] == '' ) return 1
+  if(inputCells[4] == S && inputCells[6] == S && inputCells[2] == U && inputCells[8] == '' ) return 8
 
-  if(inputCells[0] == S && inputCells[8] == S && inputCells[4] == U ) return 1
-  if(inputCells[2] == S && inputCells[6] == S && inputCells[4] == U ) return 7
+  if(inputCells[0] == S && inputCells[8] == S && inputCells[4] == U && inputCells[1] == '' ) return 1
+  if(inputCells[2] == S && inputCells[6] == S && inputCells[4] == U && inputCells[7] == '' ) return 7
+
+  if(inputCells[1] == S && inputCells[8] == S && inputCells[4] == U && inputCells[2] == '' ) return 2
+  if(inputCells[1] == S && inputCells[6] == S && inputCells[4] == U && inputCells[0] == '' ) return 0
+  if(inputCells[6] == S && inputCells[5] == S && inputCells[4] == U && inputCells[8] == '' ) return 8
+  if(inputCells[0] == S && inputCells[5] == S && inputCells[4] == U && inputCells[2] == '' ) return 2
+  if(inputCells[2] == S && inputCells[7] == S && inputCells[4] == U && inputCells[8] == '' ) return 8
+  if(inputCells[0] == S && inputCells[7] == S && inputCells[4] == U && inputCells[6] == '' ) return 6
+  if(inputCells[3] == S && inputCells[8] == S && inputCells[4] == U && inputCells[6] == '' ) return 6
+  if(inputCells[2] == S && inputCells[3] == S && inputCells[4] == U && inputCells[0] == '' ) return 0
   
-  return ran()
+  return randomMove()
 }
